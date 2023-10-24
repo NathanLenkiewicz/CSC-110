@@ -29,14 +29,29 @@ def move_king(board, position, direction):
     # right)
     # 0 is the furthest left position
     # position is the piece being moved
-    if direction == "LEFT": 
-        for i in range(len(board)):
-            if (board[position-i] != "EMPTY"):
-                board[position-1] = board[position]
-        board[position] = "EMPTY"
-    return board
+    if (direction == "RIGHT"):
+        for index in range(len(board)-1):
+            if index < 8 and direction == "RIGHT":
+                if (board[index+1]) == "EMPTY":
+                    board[index] = board[position]
+                else:
+                    board[index+1] = board[position]
+                    board[index] = "EMPTY"
+                    return board
+    if (direction == "LEFT"):
+        for j in range(len(board)-1, -1, -1):
+            if (j > 0 and direction == "LEFT"):
+                if (board[j-1] == "EMPTY"):
+                    board[j] = board[position]
+                else:
+                    board[j-1] = board[position]
+                    board[j] = "EMPTY"
+                    return board
+        
 
-move_king(board, 0, "RIGHT")
+        #print(f"The board at index is {board[i]} and the board at index + 1 is {board[i+1]}")
+
+    #return board
+            
+print(move_king(board, 0, "LEFT"))
 print( printable_board(board) )
-
-#print(move_king(board, 2, "RIGHT"))
